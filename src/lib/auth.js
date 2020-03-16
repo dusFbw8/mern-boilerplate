@@ -170,33 +170,31 @@ export function AuthLinks(){
 
 // This provides all state to the component for now
 const authProps = state => state
-// This component only displays nested Componets if
+
+// This component only displays nested Components if
 // we have valid authentication
 export const IfAuthenticated =
 connect( authProps )(
-  function(props){
-    const { children } = props;
-    const { verified } = props.auth;
+  function( { auth: { verified }, children } ){
     return verified ? children : null;
   }
 )
 
-// This component does NOT display nested Componets if
+// This component does NOT display nested Components if
 // we have valid authentication
 export const IfUnauthenticated =
 connect( authProps )(
-  function(props){
-    const { children } = props;
-    const { verified } = props.auth;
+  function( { auth: { verified }, children } ){
     return verified ? null : children;
   }
 )
 
-// This component triggers a logout
+// This component triggers a logout,
+//   - it simply calls the logout action
+//     provided by authActions
 export const Logout =
 connect( null, authActions )(
-  function(props){
-    const { logout } = props.auth;
+  function( { auth:{ logout }} ){
     return <a onClick={logout}>Logout</a>;
   }
 )

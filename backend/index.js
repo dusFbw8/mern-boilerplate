@@ -168,6 +168,7 @@ app.post('/auth/profile', ckeckAuth, (req,res)=>{
     authId:       req.user.authId,
     name:         req.user.name,
     email:        req.user.email,
+    group:        req.user.group,
     profileImage: req.user.profileImage
   }})
 });

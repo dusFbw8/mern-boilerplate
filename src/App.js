@@ -15,6 +15,9 @@ function App() {
   <div className="App">
     <IfAuthenticated>
       Hi {authState.user.name}!<br/>
+      {authState.user.email}<br/>
+      {authState.user.profileImage}<br/>
+      {authState.user.group ? authState.user.group.join(', ') : ''}<br/>
       <Logout/>
     </IfAuthenticated>
     <IfUnauthenticated>

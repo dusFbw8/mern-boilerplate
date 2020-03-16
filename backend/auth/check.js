@@ -30,6 +30,7 @@ module.exports = (req, res, next) => {
       if ( config.admins.includes(user.authId) )
         req.user.group.push('admin')
       // call the next function to finish the middleware
+      console.log(req.user.authId)
       return next();
     });
   });

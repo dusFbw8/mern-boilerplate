@@ -113,7 +113,7 @@ Object.keys(config.auth)
         //  - contains the clientID and clientSecret from config.auth[provider]
         ...Options,
         ...config.auth[provider],
-        callbackURL:`http://bing.com:3001/auth/${provider}/callback`
+        callbackURL:`${packageJSON.backend}/auth/${provider}/callback`
       },
       middleware // provide the middleware function we created above
   ));
@@ -132,12 +132,12 @@ Object.keys(config.auth)
     (req, res) => {
       const { email, name, id } = req.user;
       const token = jwt.sign({name,email,sub:id}, config.jwtSecret);
-      res.redirect(`http://bing.com:3000/success/${token}`);
+      res.redirect(`${packageJSON.homepage}/success/${token}`);
     }
   );
 });
 
-// So finally wen need to give passport a way to get and save users
+// So finally we need to give passport a way to get and save users
 //  for it's session management, these functions are
 //    - serializeUser   - prepare a user to be save inside a session
 //    - deserializeUser - read a user from db into session

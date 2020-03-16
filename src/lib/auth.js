@@ -73,7 +73,7 @@ export const authReducer = function( state = preloadedState, action ){
       POST.token = false;
       break;
     case "auth:ok":
-      state = { ...state, progress:false, token:action.token, verified:true };
+      state = { ...state, progress:false, token:action.token, verified:true, user:action.user };
       POST.token = action.token;
       break;
     default:

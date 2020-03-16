@@ -1,4 +1,6 @@
+
 import React from 'react';
+import { useSelector } from 'react-redux'
 
 import {
   AuthLinks,
@@ -8,10 +10,11 @@ import {
 } from './lib/auth'
 
 function App() {
+  const authState = useSelector( state => state.auth );
   return (
   <div className="App">
     <IfAuthenticated>
-      Hi!<br/>
+      Hi {authState.user.name}!<br/>
       <Logout/>
     </IfAuthenticated>
     <IfUnauthenticated>

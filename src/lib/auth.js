@@ -98,8 +98,9 @@ export const authActions = function( dispatch ){
       // call the auth/check route, if our token is valid this should work
       const result = await POST('/auth/check');
       if ( result.success ){
+        const { user } = await POST('/auth/profile');
         // if it worked, this is the same as a successful login
-        dispatch({ type:'auth:ok', token });
+        dispatch({ type:'auth:ok', token, user });
       } else {
         // if it did not work, this is the same as a failed login
         dispatch({ type:'auth:fail', error:result.message });
@@ -123,7 +124,7 @@ const AuthSuccess = connect( null, authActions )(
   function AuthSuccess(props){
     const { auth } = props;
     const token = props.match.params.token;
-    auth.ok(token);
+    auth.check(token);
     props.history.push('/');
     return null;
   }
@@ -194,7 +195,7 @@ connect( authProps )(
 //     provided by authActions
 export const Logout =
 connect( null, authActions )(
-  function( { auth:{ logout }} ){
+  function( { auth:{ logout } } ){
     return <a onClick={logout}>Logout</a>;
   }
 )

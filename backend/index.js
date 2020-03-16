@@ -156,10 +156,20 @@ passport.deserializeUser(function (id, done) {
 //   - this is supposed to make sure a user is authenticated
 //     the frontend uses this route to verify a store token
 //     is still valid.
-const ckeckAuth = require('./auth/check');
+// const authRouter = require('./auth/router');
+const ckeckAuth  = require('./auth/check');
 
 app.post('/auth/check', ckeckAuth, (req,res)=>{
   res.json({ success: true })
+});
+
+app.post('/auth/profile', ckeckAuth, (req,res)=>{
+  res.json({ success: true, user:{
+    authId:       req.user.authId,
+    name:         req.user.name,
+    email:        req.user.email,
+    profileImage: req.user.profileImage
+  }})
 });
 
 /*

@@ -1,11 +1,22 @@
 import React from 'react';
 
-import { AuthLinks } from './lib/auth'
+import {
+  AuthLinks,
+  IfAuthenticated,
+  IfUnauthenticated,
+  Logout
+} from './lib/auth'
 
 function App() {
   return (
   <div className="App">
-    <AuthLinks/>
+    <IfAuthenticated>
+      Hi!<br/>
+      <Logout/>
+    </IfAuthenticated>
+    <IfUnauthenticated>
+      <AuthLinks/>
+    </IfUnauthenticated>
   </div> );
 }
 

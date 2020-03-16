@@ -144,7 +144,7 @@ Object.keys(config.auth)
 
 passport.serializeUser( function (user, done) {
   return done(null, user.authId);
-} );
+});
 
 passport.deserializeUser(function (id, done) {
   User.findOne({authId:id}, function (err, user) {

@@ -2,8 +2,8 @@
   "name": "react-passport",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://bing.com:3000",
-  "backend": "http://bing.com:3001",
+  "homepage": "http://mernplate.com:3000",
+  "backend": "http://mernplate.com:3001",
   "authProviders": [
     "github",
     "google"

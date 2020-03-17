@@ -1,5 +1,9 @@
 
-const config      = require("../config.json")
+let config = {};
+if ( process.env.CONFIG_JSON ){
+       config = JSON.parse(process.env.CONFIG_JSON);
+} else config = require("../config.json");
+
 const packageJSON = require("../package.json")
 const sanity      = require("./sanity.js")
 

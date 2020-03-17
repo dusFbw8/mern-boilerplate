@@ -190,6 +190,30 @@ connect( authProps )(
   }
 )
 
+// This component will only show it's childrens if
+// the user is authenticated and in a certain group
+export const IfGroup =
+connect( authProps )(
+  function(
+    {
+      auth: { user: { group } },
+      need = [ ],
+      children
+    }
+  ){
+    if ( ! group )
+      return null;
+    if ( group.includes('admin') )
+      return children;
+    // group : ['admin','staff','teacher']
+    // need  : ['student','teacher']
+    const verified = need.reduce(
+      (p,v)=> p || group.includes(v)
+    , false );
+    return verified ? children : null;
+  }
+)
+
 // This component triggers a logout,
 //   - it simply calls the logout action
 //     provided by authActions

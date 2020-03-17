@@ -1,29 +1,23 @@
 
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import {
   AuthLinks,
   IfAuthenticated,
   IfUnauthenticated,
-  Logout
+  Logout,
+  authActions
 } from './lib/auth'
+
+import AppBar from './lib/component/AppMenu';
 
 function App() {
   const authState = useSelector( state => state.auth );
-  return (
-  <div className="App">
-    <IfAuthenticated>
-      Hi {authState.user.name}!<br/>
-      {authState.user.email}<br/>
-      {authState.user.profileImage}<br/>
-      {authState.user.group ? authState.user.group.join(', ') : ''}<br/>
-      <Logout/>
-    </IfAuthenticated>
-    <IfUnauthenticated>
-      <AuthLinks/>
-    </IfUnauthenticated>
-  </div> );
+  const actions   = authActions( useDispatch() ).auth;
+
+  const [open,setMenu] = React.useState(false);
+  return ( <AppBar/> );
 }
 
 export default App;
